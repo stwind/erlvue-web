@@ -1,0 +1,13 @@
+{
+  "name": "erlvue-web",
+  "version": "0.0.1",
+  "dependencies": {
+    "requirejs": "~2.1.8",
+    "modernizr": "~2.6.2",
+    "jquery": "~2.0.3",
+    "backbone": "~1.0.0",
+    "underscore": "~1.5.1",
+    "handlebars": "~1.0.0"
+  },
+  "devDependencies": {}
+}
