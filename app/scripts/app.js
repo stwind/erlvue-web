@@ -1,6 +1,12 @@
 /*global define */
-define([], function () {
-    'use strict';
+define([
+  'mediator'
+], function (mediator) {
+  'use strict';
 
-    return '\'Allo \'Allo!';
+  mediator.init();
+
+  Backbone.history.start({ pushState: true, root: '/' });
+
+  return 'hoho';
 });

@@ -3,7 +3,8 @@ require.config({
     jquery: '../bower_components/jquery/jquery',
     backbone: '../bower_components/backbone/backbone',
     underscore: '../bower_components/underscore/underscore',
-    handlebars: '../bower_components/handlebars/handlebars.runtime'
+    handlebars: '../bower_components/handlebars/handlebars.runtime',
+    bacon: '../bower_components/bacon/dist/Bacon'
   },
   shim: {
     underscore: { exports: '_' },
@@ -15,10 +16,8 @@ require.config({
   }
 });
 
-require(['app','jquery','handlebars','underscore'], function (app, $,H,_) {
+require(['app','jquery'], function (app, $) {
     'use strict';
-    console.log(H);
-    console.log(_);
     // use app here
     console.log(app);
     console.log('Running jQuery %s', $().jquery);
