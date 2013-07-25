@@ -2,6 +2,7 @@ require.config({
   paths: {
     jquery: '../bower_components/jquery/jquery',
     backbone: '../bower_components/backbone/backbone',
+    'backbone.layoutmanager': '../bower_components/layoutmanager/backbone.layoutmanager',
     underscore: '../bower_components/underscore/underscore',
     handlebars: '../bower_components/handlebars/handlebars.runtime',
     bacon: '../bower_components/bacon/dist/Bacon'
@@ -12,7 +13,8 @@ require.config({
       deps: ['underscore', 'jquery'],
       exports: 'Backbone'
     },
-    handlebars: { exports: 'Handlebars' }
+    handlebars: { exports: 'Handlebars' },
+    'backbone.layoutmanager': ['backbone']
   }
 });
 

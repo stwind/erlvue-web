@@ -1,12 +1,12 @@
 define([
-  'backbone',
-  'comp/event'
-], function(Backbone, Event) {
+  'backbone'
+], function(Backbone, AppModel) {
 
   var Router = Backbone.Router.extend({
 
-    initialize: function(options) {
-      this.event = Event.stream(this);
+    initialize: function(opt) {
+      this.model = opt.model;
+      Backbone.history.start(opt);
     },
 
     routes: {
@@ -14,7 +14,6 @@ define([
     },
 
     index: function () {
-      this.event.trigger('index', 'fuck');
     }
   });
 

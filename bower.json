@@ -6,6 +6,7 @@
     "modernizr": "~2.6.2",
     "jquery": "~2.0.3",
     "backbone": "~1.0.0",
+    "layoutmanager": "~0.8.8",
     "underscore": "~1.5.1",
     "handlebars": "~1.0.0",
     "bacon": "~0.6.8"
