@@ -82,8 +82,17 @@ define([
 
     this.socket.send(wampMsg.call(callId, uri, args));
 
-    this.bus.callresult(callId).onValue(dfd.resolve);
-    this.bus.callerror(callId).onValue(dfd.reject);
+    this.bus.callresult(callId).onValue(function (res) {
+      dfd.resolve(res);
+
+      return Bacon.noMore;
+    });
+
+    this.bus.callerror(callId).onValue(function (result) {
+      dfd.reject(result);
+
+      return Bacon.noMore;
+    });
 
     return dfd;
   };
