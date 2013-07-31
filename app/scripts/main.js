@@ -5,7 +5,8 @@ require.config({
     'backbone.layoutmanager': '../bower_components/layoutmanager/backbone.layoutmanager',
     underscore: '../bower_components/underscore/underscore',
     handlebars: '../bower_components/handlebars/handlebars.runtime',
-    bacon: '../bower_components/bacon/dist/Bacon'
+    bacon: '../bower_components/bacon/dist/Bacon',
+    sockjs: '../bower_components/sockjs-0.3.4/index'
   },
   shim: {
     underscore: { exports: '_' },
