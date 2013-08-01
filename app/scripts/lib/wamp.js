@@ -67,6 +67,9 @@ define([
     },
     publish: function (topic, event, exclude, eligible) {
       return JSON.stringify([7, topic, event, exclude, eligible]);
+    },
+    prefix: function (prefix, uri) {
+      return JSON.stringify([1, prefix, uri]);
     }
   };
 
@@ -119,16 +122,26 @@ define([
     this.socket.send(msg);
   };
 
+  Session.prototype.prefix = function (prefixes) {
+    var socket = this.socket;
+    _.each(prefixes, function (uri, pre) {
+      socket.send(wampMsg.prefix(pre, uri));
+    });
+  };
+
   var Wamp = {
 
     connect: function (url, opts) {
 
       var socket = new SockJS(url), bus = msgBus(),
           session = new Session(socket, bus),
+          opts = opts || {},
           dfd = $.Deferred();
 
       socket.onopen = function() {
         console.log(' [*] Connected (using: '+socket.protocol+')');
+
+        opts.prefixes && session.prefix(opts.prefixes);
 
         dfd.resolve(session);
       };
