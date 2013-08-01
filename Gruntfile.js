@@ -143,7 +143,8 @@ module.exports = function (grunt) {
         options: {
           amd: true,
           processName: function (filename) {
-            return Path.basename(filename, '.hbs');
+            var tmplPath = yeomanConfig.templates + '/';
+            return filename.replace(tmplPath, '').replace('.hbs', '');
           },
           processContent: function (content) {
             return content.replace(/^[\r\n]+/, '').replace(/[\r\n]*$/, '');
