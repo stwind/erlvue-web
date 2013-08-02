@@ -19,9 +19,11 @@ require.config({
   }
 });
 
-require(['app','jquery'], function (app, $) {
+require(['app','jquery'], function (App, $) {
     'use strict';
     // use app here
-    console.log(app);
-    console.log('Running jQuery %s', $().jquery);
+
+    App.start().then(function(app) {
+      console.log('app started: ', app);
+    });
 });

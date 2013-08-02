@@ -4,6 +4,8 @@ define([
   
   var Model = Backbone.Model.extend({
 
+    url: '/',
+
     defaults: {
       name: 'I am app model'
     }

@@ -31,7 +31,7 @@ define([
       callresult: function (callId) {
         return bus.filter(function (msg) {
           return msg.type == 'callresult' && msg.callId == callId;
-        }).map('.result');
+        }).map('.result').log();
       },
       callerror: function (callId) {
         return bus.filter(function (msg) {
@@ -100,11 +100,11 @@ define([
     return dfd;
   };
 
-  Session.prototype.subscribe = function (topic, callback) {
+  Session.prototype.subscribe = function (topic, callback, context) {
     var topics = this.topics = this.topics || [], 
         stream = topics[topic] = this.bus.event(topic);
 
-    stream.onValue(function (event) { callback(topic, event); });
+    stream.onValue(function (event) { callback.call(context, event, topic); });
 
     this.socket.send(wampMsg.sub(topic));
   };
