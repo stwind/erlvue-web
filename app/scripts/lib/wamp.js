@@ -104,7 +104,7 @@ define([
     var topics = this.topics = this.topics || [], 
         stream = topics[topic] = this.bus.event(topic);
 
-    stream.onValue(function (event) { callback.call(context, event, topic); });
+    stream.onValue(function (msg) { callback.call(context, msg.event, msg.topic); });
 
     this.socket.send(wampMsg.sub(topic));
   };
