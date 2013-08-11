@@ -1,13 +1,28 @@
 define([
-  'backbone'
-], function (Backbone) {
+  'backbone',
+  './nodes',
+  './procs'
+], function (Backbone, Nodes, Procs) {
   
   var Model = Backbone.Model.extend({
 
-    url: '/',
+    initialize: function () {
+      var nodes = new Nodes.Collection(),
+          model = this;
 
-    defaults: {
-      name: 'I am app model'
+      this.set('nodes', nodes);
+
+      nodes.fetch().then(function(){
+        model.selectNode(nodes.at(0).id);
+      });
+    },
+
+    selectNode: function (name) {
+      var current = this.get('current');
+      if (!current || (current.node != name)) {
+        var collection = new Procs.Collection(null, { node: name });
+        this.set('current', collection);
+      }
     }
 
   });

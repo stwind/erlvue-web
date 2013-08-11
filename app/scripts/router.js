@@ -14,10 +14,8 @@ define([
     },
 
     index: function () {
-      this.model.fetch().then(function (result) {
-        console.log("shit");
-      });
     }
+
   });
 
   return Router;

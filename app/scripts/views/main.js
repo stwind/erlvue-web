@@ -1,13 +1,25 @@
 define([
-  'backbone'
-], function (Backbone) {
+  'backbone',
+  './content'
+], function (Backbone, ContentView) {
   
   var View = Backbone.View.extend({
 
     template: 'main',
 
+    sections: {
+      content: '.content'
+    },
+
     initialize: function () {
-      this.model.on('change', this.render, this);
+      var model = this.model;
+
+      var content = new ContentView({ model: model });
+
+      this.setViews({ 
+        content: content
+      });
+
       this.render();
     }
 

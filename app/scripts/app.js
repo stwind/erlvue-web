@@ -14,7 +14,7 @@ define([
 
   Backbone.Layout.configure({
     manage: true,
-    fetch: function(tmpl) {
+    fetchTemplate: function(tmpl) {
       return JST[tmpl];
     },
     serialize: function () {
@@ -24,10 +24,10 @@ define([
   });
 
   return {
-    start: function () {
-      var dfd = $.Deferred();
+    start: function (opt) {
+      var def = $.Deferred();
 
-      Wamp.connect('http://localhost:9081/wamp').then(function(session) {
+      Wamp.connect(opt.wsUrl).then(function(session) {
         var app = {};
 
         Sync.init(session);
@@ -35,17 +35,18 @@ define([
         app.appModel = new AppModel();
         app.appView = new AppView({ 
           model: app.appModel, 
-          el: '#main' 
+          el: opt.mainEl 
         });
         app.router = new Router({ 
           pushState: true, root: '/',
-          model: app.appModel
+          model: app.appModel,
+          view: app.appView
         });
 
-        dfd.resolve(app);
+        def.resolve(app);
       });
 
-      return dfd;
+      return def;
     }
   };
 });
