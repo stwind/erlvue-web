@@ -1,6 +1,7 @@
 define([
-  'backbone'
-], function (Backbone) {
+  'backbone',
+  'd3'
+], function (Backbone, d3) {
 
   var View = Backbone.View.extend({
 
@@ -11,18 +12,18 @@ define([
     },
 
     show: function (model, procs) {
-      this.collection = procs;
-      this.collection.iobind();
-      this.collection.on('add', this.addProc, this);
-      this.collection.on('remove', this.removeProc, this);
+      var collection = this.collection = procs;
+      collection.iobind().on('sync', this.update, this);
+      this.container = d3.select(this.el).select('.container');
     },
 
-    addProc: function (proc) {
-      console.log("shit added");
-    },
+    update: function () {
+      var models = this.collection.models,
+          items = this.container.selectAll('li').data(models);
 
-    removeProc: function (proc) {
-      console.log("shit removed");
+      items.enter().append('li').text(function (d) {
+        return d.get('pid');
+      });
     }
 
   });
