@@ -13,17 +13,24 @@ define([
         iobind: function iobind (options) {
           if (this.isSyncing) return this;
 
+          options = options ? _.clone(options) : {};
+
           var url = _.result(this, 'url') || urlError();
+          var object = this;
 
           this.isSyncing = true;
 
           session.subscribe(url, function(data) {
-            if (this instanceof Backbone.Model) {
-              this.set(this.parse(data, options), options);
-            } else if (this instanceof Backbone.Collection) {
-              this.set(data, options);
+            if (object instanceof Backbone.Model) {
+              if (object.set(object.parse(resp, options), options)) {
+                object.trigger('sync', object, data, options);
+              }
+            } else if (object instanceof Backbone.Collection) {
+              var method = options.reset ? 'reset' : 'set';
+              object[method](data, options);
+              object.trigger('sync', object, data, options);
             }
-          }, this);
+          });
 
           return this;
         },
