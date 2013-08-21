@@ -134,7 +134,8 @@ module.exports = function (grunt) {
     mocha: {
       all: {
         options: {
-          run: true,
+          //run: true,
+          log: true,
           urls: ['http://localhost:<%= connect.options.port %>/index.html']
         }
       }
@@ -337,6 +338,8 @@ module.exports = function (grunt) {
    'clean:server',
    'concurrent:test',
    'connect:test',
+   //'open',
+   //'watch'
    'mocha'
   ]);
 
