@@ -76,7 +76,8 @@ module.exports = function (grunt) {
           middleware: function (connect) {
             return [
               mountFolder(connect, '.tmp'),
-              mountFolder(connect, 'test')
+              mountFolder(connect, 'test'),
+              mountFolder(connect, yeomanConfig.app)
             ];
           }
         }
@@ -305,7 +306,7 @@ module.exports = function (grunt) {
     },
     concurrent: {
       server: [ 'coffee:dist', 'less', 'handlebars' ],
-      test: [ 'coffee' ],
+      test: [ 'coffee', 'less', 'handlebars' ],
       dist: [ 'coffee', 'less', 'handlebars', 'imagemin', 'svgmin', 'htmlmin' ]
     },
     bower: {
