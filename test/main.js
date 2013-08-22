@@ -15,7 +15,5 @@ require(['chai'], function (chai) {
 
   require([
     'spec/test'
-  ], function () {
-    mocha.run();
-  });
+  ], mocha.run);
 });
