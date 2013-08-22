@@ -5,6 +5,12 @@ define([
     describe('maybe a bit more context here', function () {
       it('should run here few assertions', function () {
 
+        var spy = sinon.spy();
+
+        spy();
+
+        expect(spy).to.have.been.called;
+
       });
     });
   });
