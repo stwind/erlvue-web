@@ -1,8 +1,10 @@
 require.config({
+  baseUrl: '/base/app/scripts',
   paths: {
-    chai: 'bower_components/chai/chai',
-    sinon: 'bower_components/sinon/index',
-    'sinon-chai': 'bower_components/sinon-chai/lib/sinon-chai'
+    chai: '../bower_components/chai/chai',
+    sinon: '../bower_components/sinon/index',
+    'sinon-chai': '../bower_components/sinon-chai/lib/sinon-chai',
+    spec: '../../test/spec'
   },
   shim: {
     sinon: { exports: 'sinon' }
@@ -16,8 +18,6 @@ require([
 ], function (chai, sinon, sinonChai) {
   'use strict';
 
-  mocha.setup('bdd');
-
   chai.use(sinonChai);
 
   window.expect = chai.expect
@@ -25,5 +25,7 @@ require([
 
   require([
     'spec/test'
-  ], mocha.run);
+  ], function() {
+     window.__karma__.start();
+  });
 });

@@ -21,7 +21,8 @@ module.exports = function (grunt) {
   var yeomanConfig = {
     app: 'app',
     dist: 'dist',
-    templates: 'app/templates'
+    templates: 'app/templates',
+    components: 'app/bower_components'
   };
 
   grunt.initConfig({
@@ -138,6 +139,20 @@ module.exports = function (grunt) {
           urls: ['http://localhost:<%= connect.options.port %>/index.html'],
           reporter: 'Spec'
         }
+      }
+    },
+    karma: {
+      options: {
+        frameworks: ['mocha','requirejs'],
+        files: [
+          { pattern: '<%= yeoman.components %>/**/*.js', served: true, included: false },
+          { pattern: 'test/spec/*.js', served: true, included: false },
+          'test/test-main.js',
+        ]
+      },
+      dev: {
+        singleRun: true,
+        browsers: ['PhantomJS']
       }
     },
     handlebars: {
