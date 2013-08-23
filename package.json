@@ -18,7 +18,7 @@
     "grunt-contrib-imagemin": "~0.1.4",
     "grunt-contrib-handlebars": "~0.5.10",
     "grunt-contrib-less": "~0.6.4",
-    "grunt-contrib-watch": "~0.4.4",
+    "grunt-contrib-watch": "~0.5.2",
     "grunt-rev": "~0.1.0",
     "grunt-usemin": "~0.1.12",
     "grunt-mocha": "~0.4.1",

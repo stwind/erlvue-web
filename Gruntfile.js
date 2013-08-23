@@ -44,6 +44,10 @@ module.exports = function (grunt) {
         files: ['<%= yeoman.app %>/styles/*.less'],
         tasks: ['less']
       },
+      karma: {
+        files: ['test/spec/{,*/}*.js'],
+        tasks: ['karma:dev:run']
+      },
       livereload: {
         options: {
           livereload: LIVERELOAD_PORT
@@ -67,17 +71,6 @@ module.exports = function (grunt) {
             return [
               lrSnippet,
               mountFolder(connect, '.tmp'),
-              mountFolder(connect, yeomanConfig.app)
-            ];
-          }
-        }
-      },
-      test: {
-        options: {
-          middleware: function (connect) {
-            return [
-              mountFolder(connect, '.tmp'),
-              mountFolder(connect, 'test'),
               mountFolder(connect, yeomanConfig.app)
             ];
           }
@@ -146,13 +139,19 @@ module.exports = function (grunt) {
         frameworks: ['mocha','requirejs'],
         files: [
           { pattern: '<%= yeoman.components %>/**/*.js', served: true, included: false },
-          { pattern: 'test/spec/*.js', served: true, included: false },
+          { pattern: '{.tmp,<%= yeoman.app %>}/scripts/{,*/}*.js', served: true, included: false },
+          //{ pattern: '.tmp/spec/{,*/}*.js', served: true, included: false },
+          { pattern: 'test/spec/{,*/}*.js', served: true, included: false },
           'test/test-main.js',
         ]
       },
-      dev: {
+      continuous: {
         singleRun: true,
         browsers: ['PhantomJS']
+      },
+      dev: {
+        background: true,
+        browsers: ['Chrome']
       }
     },
     handlebars: {
@@ -338,6 +337,8 @@ module.exports = function (grunt) {
   grunt.registerTask('server', function (target) {
     if (target === 'dist') {
       return grunt.task.run(['build', 'open', 'connect:dist:keepalive']);
+    } else if (target === 'test') {
+      return grunt.task.run(['karma:dev', 'watch:karma']);
     }
 
     grunt.task.run([
@@ -352,10 +353,7 @@ module.exports = function (grunt) {
   grunt.registerTask('test', [
    'clean:server',
    'concurrent:test',
-   'connect:test',
-   //'open',
-   //'watch'
-   'mocha'
+   'karma:continuous'
   ]);
 
   grunt.registerTask('build', [
