@@ -45,7 +45,7 @@ module.exports = function (grunt) {
         tasks: ['less']
       },
       karma: {
-        files: ['test/spec/{,*/}*.js'],
+        files: ['test/{,spec{,/*}/}*.js'],
         tasks: ['karma:dev:run']
       },
       livereload: {
@@ -125,33 +125,24 @@ module.exports = function (grunt) {
         }
       }
     },
-    mocha: {
-      all: {
-        options: {
-          log: true,
-          urls: ['http://localhost:<%= connect.options.port %>/index.html'],
-          reporter: 'Spec'
-        }
-      }
-    },
     karma: {
       options: {
         frameworks: ['mocha','requirejs'],
         files: [
           { pattern: '<%= yeoman.components %>/**/*.js', served: true, included: false },
           { pattern: '{.tmp,<%= yeoman.app %>}/scripts/{,*/}*.js', served: true, included: false },
-          //{ pattern: '.tmp/spec/{,*/}*.js', served: true, included: false },
-          { pattern: 'test/spec/{,*/}*.js', served: true, included: false },
+          { pattern: '{.tmp,test}/spec/{,*/}*.js', served: true, included: false },
           'test/test-main.js',
         ]
       },
-      continuous: {
+      ci: {
         singleRun: true,
         browsers: ['PhantomJS']
       },
       dev: {
         background: true,
-        browsers: ['Chrome']
+        //browsers: ['Chrome']
+        browsers: ['PhantomJS']
       }
     },
     handlebars: {
@@ -260,22 +251,6 @@ module.exports = function (grunt) {
         }]
       }
     },
-    cssmin: {
-      // This task is pre-configured if you do not wish to use Usemin
-      // blocks for your CSS. By default, the Usemin block from your
-      // `index.html` will take care of minification, e.g.
-      //
-      //     <!-- build:css({.tmp,app}) styles/main.css -->
-      //
-      // dist: {
-      //     files: {
-      //         '<%= yeoman.dist %>/styles/main.css': [
-      //             '.tmp/styles/{,*/}*.css',
-    //             '<%= yeoman.app %>/styles/{,*/}*.css'
-    //         ]
-    //     }
-    // }
-    },
     htmlmin: {
       dist: {
         options: {
@@ -353,7 +328,7 @@ module.exports = function (grunt) {
   grunt.registerTask('test', [
    'clean:server',
    'concurrent:test',
-   'karma:continuous'
+   'karma:ci'
   ]);
 
   grunt.registerTask('build', [
