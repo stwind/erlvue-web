@@ -7,6 +7,7 @@ require.config({
     'underscore.string': '../bower_components/underscore.string/lib/underscore.string',
     handlebars: '../bower_components/handlebars/handlebars.runtime',
     d3: '../bower_components/d3/d3',
+    async: '../bower_components/async/lib/async',
     bacon: '../bower_components/bacon/dist/Bacon',
     sockjs: '../bower_components/sockjs-0.3.4/index'
   },
@@ -17,14 +18,12 @@ require.config({
       exports: 'Backbone'
     },
     d3: { exports: 'd3' },
-    handlebars: { exports: 'Handlebars' },
-    'backbone.layoutmanager': ['backbone']
+    handlebars: { exports: 'Handlebars' }
   }
 });
 
 require(['app','jquery'], function (App, $) {
     'use strict';
-    // use app here
 
     App.start({
       wsUrl: 'http://localhost:9081/wamp',

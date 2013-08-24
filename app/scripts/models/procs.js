@@ -10,6 +10,8 @@ define([
   var Procs = Backbone.Collection.extend({
     model: Proc,
 
+    comparator: 'mem',
+
     url: function() {
       return '/procs/' + encodeURIComponent(this.node);
     },
