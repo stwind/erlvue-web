@@ -1,14 +1,24 @@
 define([
-  'templates',
-  'views/content'
-], function(JST, Content) {
+  'test/helpers',
+  'squire'
+], function(helpers, Squire) {
 
-  describe('Content View', function () {
+  var injector = new Squire();
 
-    it('should be includable', function () {
+  injector.mock('views/nodeItem', { fuck: 'you' })
+          .store('views/nodeItem');
 
-      expect(Content).to.exist;
-      expect(JST).to.exist;
+  return helpers.withMocks(injector, [
+    'views/content'
+  ], function(ContentView) {
+
+    describe('Content View', function () {
+
+      it('should be includable', function() {
+        expect(ContentView).to.exist;
+      });
+
+      after(function() { injector.clean(); });
 
     });
 

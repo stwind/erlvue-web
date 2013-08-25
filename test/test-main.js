@@ -3,9 +3,11 @@ require.config({
   paths: {
     jquery: '../bower_components/jquery/jquery',
     backbone: '../bower_components/backbone/backbone',
-    'backbone.layoutmanager': '../bower_components/layoutmanager/backbone.layoutmanager',
+    'backbone.layoutmanager': 
+      '../bower_components/layoutmanager/backbone.layoutmanager',
     underscore: '../bower_components/underscore/underscore',
-    'underscore.string': '../bower_components/underscore.string/lib/underscore.string',
+    'underscore.string': 
+      '../bower_components/underscore.string/lib/underscore.string',
     handlebars: '../bower_components/handlebars/handlebars.runtime',
     d3: '../bower_components/d3/d3',
     async: '../bower_components/async/lib/async',
@@ -17,8 +19,10 @@ require.config({
     chai: '../bower_components/chai/chai',
     sinon: '../bower_components/sinon/index',
     'sinon-chai': '../bower_components/sinon-chai/lib/sinon-chai',
+    squire: '../bower_components/squire/src/Squire',
 
-    spec: '../../test/spec'
+    spec: '../../test/spec',
+    test: '../../test'
   },
   shim: {
     underscore: { exports: '_' },
@@ -29,15 +33,22 @@ require.config({
     d3: { exports: 'd3' },
     handlebars: { exports: 'Handlebars' },
     sinon: { exports: 'sinon' },
-  },
-  deps: ['../../test/helpers']
+  }
 });
 
 require([
   'chai', 
   'sinon',
-  'sinon-chai'
-], function (chai, sinon, sinonChai) {
+  'sinon-chai',
+
+  'backbone',
+  'templates',
+
+  'jquery',
+  'underscore',
+
+  'backbone.layoutmanager'
+], function (chai, sinon, sinonChai, Backbone, JST, $, _) {
   'use strict';
 
   chai.use(sinonChai);
@@ -45,9 +56,25 @@ require([
   window.expect = chai.expect
   window.sinon = sinon;
 
+  Backbone.Layout.configure({
+    manage: true,
+    fetchTemplate: function(tmpl) {
+      return JST[tmpl];
+    },
+    serialize: function () {
+      var obj = this.collection || this.model;
+      return obj ? obj.toJSON() : {};
+    }
+  });
+
   require([
     'spec/test'
-  ], function() {
-     window.__karma__.start();
+  ], function(shit) {
+    var promises = _.foldl(_.toArray(arguments), function(acc, v) {
+      return v ? acc.concat(v) : acc;
+    }, []);
+    $.when.apply(null, promises).then(function(){
+      window.__karma__.start();
+    });
   });
 });

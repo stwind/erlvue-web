@@ -143,8 +143,8 @@ module.exports = function (grunt) {
       },
       dev: {
         background: true,
-        //browsers: ['Chrome']
-        browsers: ['PhantomJS']
+        browsers: ['Chrome']
+        //browsers: ['PhantomJS']
       }
     },
     handlebars: {
