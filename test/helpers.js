@@ -5,7 +5,7 @@ define([
 ], function(Squire, $, _) {
 
   var helpers = {
-    describeWithMocks: function (name, mocks, deps, callback) {
+    describeWithMocks: function (topic, mocks, deps, callback) {
       var def = $.Deferred(),
           injector = new Squire();
 
@@ -15,7 +15,7 @@ define([
         .require(deps, function() {
           var args = arguments;
 
-          describe(name, function() {
+          describe(topic, function() {
             callback.apply(null, args);
             after(function() { injector.clean(); });
           });

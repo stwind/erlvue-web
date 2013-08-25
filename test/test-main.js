@@ -3,8 +3,7 @@ require.config({
   paths: {
     jquery: '../bower_components/jquery/jquery',
     backbone: '../bower_components/backbone/backbone',
-    'backbone.layoutmanager': 
-      '../bower_components/layoutmanager/backbone.layoutmanager',
+    'backbone.layoutmanager': '../bower_components/layoutmanager/backbone.layoutmanager',
     underscore: '../bower_components/underscore/underscore',
     'underscore.string': 
       '../bower_components/underscore.string/lib/underscore.string',
@@ -41,14 +40,9 @@ require([
   'sinon',
   'sinon-chai',
 
-  'backbone',
-  'templates',
-
   'jquery',
-  'underscore',
-
-  'backbone.layoutmanager'
-], function (chai, sinon, sinonChai, Backbone, JST, $, _) {
+  'underscore'
+], function (chai, sinon, sinonChai, $, _) {
   'use strict';
 
   chai.use(sinonChai);
@@ -56,25 +50,12 @@ require([
   window.expect = chai.expect
   window.sinon = sinon;
 
-  Backbone.Layout.configure({
-    manage: true,
-    fetchTemplate: function(tmpl) {
-      return JST[tmpl];
-    },
-    serialize: function () {
-      var obj = this.collection || this.model;
-      return obj ? obj.toJSON() : {};
-    }
-  });
-
   require([
     'spec/test'
   ], function() {
     var promises = _.foldl(arguments, function(acc, v) {
       return v ? acc.concat(v) : acc;
     }, []);
-    $.when.apply(null, promises).then(function(){
-      window.__karma__.start();
-    });
+    $.when.apply(null, promises).then(__karma__.start);
   });
 });
