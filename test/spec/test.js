@@ -1,18 +1,17 @@
 define([
-], function() {
+  'templates',
+  'views/content'
+], function(JST, Content) {
 
-  describe('Give it some context', function () {
-    describe('maybe a bit more context here', function () {
-      it('should run here few assertions', function () {
+  describe('Content View', function () {
 
-        var spy = sinon.spy();
+    it('should be includable', function () {
 
-        spy();
+      expect(Content).to.exist;
+      expect(JST).to.exist;
 
-        expect(spy).to.have.been.called;
-
-      });
     });
+
   });
 
 });

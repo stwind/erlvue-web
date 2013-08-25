@@ -133,7 +133,9 @@ module.exports = function (grunt) {
           { pattern: '{.tmp,<%= yeoman.app %>}/scripts/{,*/}*.js', served: true, included: false },
           { pattern: '{.tmp,test}/spec/{,*/}*.js', served: true, included: false },
           'test/test-main.js',
-        ]
+          { pattern: 'test/*.js', served: true, included: false }
+        ],
+        reporters: ['dots']
       },
       ci: {
         singleRun: true,
