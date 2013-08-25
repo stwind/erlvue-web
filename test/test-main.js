@@ -69,8 +69,8 @@ require([
 
   require([
     'spec/test'
-  ], function(shit) {
-    var promises = _.foldl(_.toArray(arguments), function(acc, v) {
+  ], function() {
+    var promises = _.foldl(arguments, function(acc, v) {
       return v ? acc.concat(v) : acc;
     }, []);
     $.when.apply(null, promises).then(function(){

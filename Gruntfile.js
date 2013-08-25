@@ -135,7 +135,7 @@ module.exports = function (grunt) {
           'test/test-main.js',
           { pattern: 'test/*.js', served: true, included: false }
         ],
-        reporters: ['dots']
+        reporters: ['spec']
       },
       ci: {
         singleRun: true,

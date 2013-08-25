@@ -1,25 +1,19 @@
 define([
-  'test/helpers',
-  'squire'
-], function(helpers, Squire) {
+  'test/helpers'
+], function(helpers) {
 
-  var injector = new Squire();
+  var mocks = {
+    'views/nodeItem': {
+      fuck: 'you'
+    }
+  };
 
-  injector.mock('views/nodeItem', { fuck: 'you' })
-          .store('views/nodeItem');
-
-  return helpers.withMocks(injector, [
+  return helpers.describeWithMocks('Content View', mocks, [
     'views/content'
   ], function(ContentView) {
 
-    describe('Content View', function () {
-
-      it('should be includable', function() {
-        expect(ContentView).to.exist;
-      });
-
-      after(function() { injector.clean(); });
-
+    it('should be includable', function() {
+      expect(ContentView).to.exist;
     });
 
   });
