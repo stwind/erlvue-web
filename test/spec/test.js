@@ -22,16 +22,28 @@ define([
 
     model.set('current', collection);
 
+    function children() {
+      return content.getViews('.container').value();
+    }
+
     it('should show model\'s current collection', function() {
       expect(content.collection).to.equal(collection);
     });
 
 
-    it('should render new child', function(done) {
-      content.on('addItem', function(view){
-        done();
+    it('should add child when model was added', function(done) {
+      expect(children()).to.be.empty;
+      content.on('addItem', function(view){ 
+        expect(children()).to.not.be.empty;
+        done(); 
       });
-      collection.add([{id: 1}]);
+      collection.add({id: 1});
+    });
+
+    it('should remove child when model was removed', function() {
+      expect(children()).to.not.be.empty;
+      collection.remove({id: 1});
+      expect(children()).to.be.empty;
     });
 
   });
