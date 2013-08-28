@@ -10,7 +10,13 @@ define([
   var Procs = Backbone.Collection.extend({
     model: Proc,
 
-    comparator: 'mem',
+    comparator: function(p1, p2) {
+      if (p1.get('mem') > p2.get('mem')) {
+        return -1;
+      } else {
+        return 1;
+      }
+    },
 
     url: function() {
       return '/procs/' + encodeURIComponent(this.node);
@@ -18,6 +24,7 @@ define([
 
     initialize: function(models, options) {
       this.node = options.node;
+      this.iobind();
     }
 
   });

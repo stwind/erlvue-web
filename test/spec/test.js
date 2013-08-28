@@ -9,9 +9,9 @@ define([
   };
 
   return helpers.describeWithMocks('Content View', mocks, [
-    'lib/backbone.layout',
-    'views/content'
-  ], function(Layout, ContentView) {
+    'views/content',
+    'lib/backbone.layout'
+  ], function(ContentView) {
 
     var model = new Backbone.Model(),
         collection = new Backbone.Collection();
