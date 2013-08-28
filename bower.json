@@ -6,15 +6,13 @@
     "modernizr": "~2.6.2",
     "jquery": "~2.0.3",
     "backbone": "~1.0.0",
-    "layoutmanager": "~0.9.0",
+    "layoutmanager": "https://github.com/tbranyen/backbone.layoutmanager.git#master",
     "underscore": "~1.5.1",
     "handlebars": "~1.0.0",
     "bacon": "~0.6.8",
     "sockjs-0.3.4": "http://cdn.sockjs.org/sockjs-0.3.4.js",
     "underscore.string": "~2.3.3",
-    "normalize-css": "~2.1.2",
-    "d3": "~3.2.8",
-    "async": "~0.2.5"
+    "normalize-css": "~2.1.2"
   },
   "devDependencies": {
     "mocha": "~1.12.0",

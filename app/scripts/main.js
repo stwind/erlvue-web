@@ -6,8 +6,8 @@ require.config({
     underscore: '../bower_components/underscore/underscore',
     'underscore.string': '../bower_components/underscore.string/lib/underscore.string',
     handlebars: '../bower_components/handlebars/handlebars.runtime',
-    d3: '../bower_components/d3/d3',
-    async: '../bower_components/async/lib/async',
+    //d3: '../bower_components/d3/d3',
+    //async: '../bower_components/async/lib/async',
     bacon: '../bower_components/bacon/dist/Bacon',
     sockjs: '../bower_components/sockjs-0.3.4/index'
   },
@@ -17,7 +17,7 @@ require.config({
       deps: ['underscore', 'jquery'],
       exports: 'Backbone'
     },
-    d3: { exports: 'd3' },
+    //d3: { exports: 'd3' },
     handlebars: { exports: 'Handlebars' }
   }
 });
