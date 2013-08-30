@@ -19,6 +19,7 @@
     "chai": "~1.7.2",
     "sinon": "http://sinonjs.org/releases/sinon-1.7.3.js",
     "sinon-chai": "~2.4.0",
-    "squire": "*"
+    "squire": "*",
+    "uri.js": "~1.11.2"
   }
 }
