@@ -12,7 +12,8 @@
     "bacon": "~0.6.8",
     "sockjs-0.3.4": "http://cdn.sockjs.org/sockjs-0.3.4.js",
     "underscore.string": "~2.3.3",
-    "normalize-css": "~2.1.2"
+    "normalize-css": "~2.1.2",
+    "uri.js": "~1.11.2"
   },
   "devDependencies": {
     "mocha": "~1.12.0",

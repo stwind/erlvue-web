@@ -1,5 +1,9 @@
+## 0.0.2
+
+* Update backbone model sycning method
+
 ## 0.0.1
 
-* Realtime processes info, sorted by memory
+* Realtime processes info (etop), sorted by memory
 * Basic unit tests
 * Production release workflow

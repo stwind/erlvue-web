@@ -1,46 +1,42 @@
 define([
-  'backbone'
-], function (Backbone) {
+  'backbone',
+  'underscore',
+  'URIjs/URI'
+], function (Backbone, _, URI) {
 
   var urlError = function() {
     throw new Error('A "url" property or function must be specified');
   };
 
   return {
-    init: function (session) {
+    init: function (session, opts) {
+      var opts = _.defaults(opts || {}, {
+        topic: function(model, name) {
+          var url = _.result(model, 'url') || urlError();
+
+          return new URI(url).path() + '?type=' + name;
+        }
+      });
 
       var io = {
-        iobind: function iobind (options) {
-          if (this.isSyncing) return this;
+        remoteOn: function (name, callback, context) {
+          var object = this, topic = opts.topic(object, name);
 
-          options = options ? _.clone(options) : {};
-
-          var url = _.result(this, 'url') || urlError();
-          var object = this;
-
-          this.isSyncing = true;
-
-          session.subscribe(url, function(data) {
-            if (object instanceof Backbone.Model) {
-              if (object.set(object.parse(resp, options), options)) {
-                object.trigger('sync', object, data, options);
-              }
-            } else if (object instanceof Backbone.Collection) {
-              var method = options.reset ? 'reset' : 'set';
-              object[method](data, options);
-              object.trigger('sync', object, data, options);
-            }
+          session.on(topic, function(data) {
+            object.trigger(topic, data, object);
           });
+
+          this.on(topic, callback, context);
 
           return this;
         },
 
-        iostop: function iostop (options) {
-          if (!this.isSyncing) return this;
+        remoteOff: function (name, callback, context) {
+          var topic = opts.topic(this, name);
 
-          var url = _.result(this, 'url') || urlError();
-          session.unsubscribe(url);
-          this.isSyncing = false;
+          this.off(topic, callback, context);
+
+          if (!this._events[topic]) session.off(topic); 
 
           return this;
         }
@@ -51,7 +47,7 @@ define([
 
       Backbone.sync = function (method, model, options) {
         var url = _.result(model, 'url') || urlError(),
-            data = model.toJSON(),
+            data = options.attrs || model.toJSON(options),
             args = method == 'create' || method == 'update' ? 
               [url, method, data] : [url, method];
 

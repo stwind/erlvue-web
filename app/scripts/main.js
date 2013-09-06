@@ -9,7 +9,8 @@ require.config({
     //d3: '../bower_components/d3/d3',
     //async: '../bower_components/async/lib/async',
     bacon: '../bower_components/bacon/dist/Bacon',
-    sockjs: '../bower_components/sockjs-0.3.4/index'
+    sockjs: '../bower_components/sockjs-0.3.4/index',
+    URIjs: '../bower_components/uri.js/src'
   },
   shim: {
     underscore: { exports: '_' },

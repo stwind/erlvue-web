@@ -192,7 +192,7 @@ module.exports = function (grunt) {
         options: {
           // `name` and `out` is set by grunt-usemin
           baseUrl: yeomanConfig.app + '/scripts',
-          optimize: 'uglify2',
+          optimize: 'none',
           // TODO: Figure out how to make sourcemaps work with grunt-usemin
           // https://github.com/yeoman/grunt-usemin/issues/30
           //generateSourceMaps: true,
@@ -204,9 +204,7 @@ module.exports = function (grunt) {
           paths: {
             templates: '../../.tmp/scripts/templates'
           },
-          uglify2: {
-            //mangle: false
-          } // https://github.com/mishoo/UglifyJS2
+          //uglify2: { } // https://github.com/mishoo/UglifyJS2
         }
       }
     },

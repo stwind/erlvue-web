@@ -1,7 +1,7 @@
 define([
   'backbone',
-  'underscore.string'
-], function (Backbone, _s) {
+  'URIjs/URI'
+], function (Backbone, URI) {
 
   var Proc = Backbone.Model.extend({
     idAttribute: 'pid'
@@ -11,20 +11,24 @@ define([
     model: Proc,
 
     comparator: function(p1, p2) {
-      if (p1.get('mem') > p2.get('mem')) {
-        return -1;
-      } else {
-        return 1;
-      }
+      return p1.get('mem') > p2.get('mem') ? -1 : 1;
     },
 
     url: function() {
-      return '/procs/' + encodeURIComponent(this.node);
+      var path = '/procs/' + URI.encode(this.node);
+      var uri = new URI(path).addQuery({ num: this.num });
+      return uri.href();
     },
 
     initialize: function(models, options) {
+      var root = this;
+
       this.node = options.node;
-      this.iobind();
+      this.num = options.num || 20;
+
+      root.remoteOn('reset', function(models) {
+        root.set(models);
+      });
     }
 
   });
