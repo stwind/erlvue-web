@@ -1,7 +1,6 @@
 ## 0.0.2
 
-* Parameterize number of processes to show
-* Basic styling
+* Update backbone model sycning method
 
 ## 0.0.1
 
