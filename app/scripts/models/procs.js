@@ -21,9 +21,14 @@ define([
     },
 
     initialize: function(models, options) {
+      var root = this;
+
       this.node = options.node;
       this.num = options.num || 20;
-      this.iobind();
+
+      root.remoteOn('reset', function(models) {
+        root.set(models);
+      });
     }
 
   });

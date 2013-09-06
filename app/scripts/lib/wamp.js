@@ -42,6 +42,7 @@ define([
       },
       event: function (topic) {
         return bus.filter(function (msg) {
+          console.log(msg);
           return msg.type == 'event' && msg.topic == topic;
         });
       },
@@ -100,16 +101,18 @@ define([
     return dfd;
   };
 
-  Session.prototype.subscribe = function (topic, callback, context) {
+  Session.prototype.on = function (topic, callback, context) {
     var topics = this.topics = this.topics || [], 
         stream = topics[topic] = this.bus.event(topic);
 
-    stream.onValue(function (msg) { callback.call(context, msg.event, msg.topic); });
+    stream.onValue(function (msg) { 
+      callback.call(context, msg.event, msg.topic); 
+    });
 
     this.socket.send(wampMsg.sub(topic));
   };
 
-  Session.prototype.unsubscribe = function (topic) {
+  Session.prototype.off = function (topic) {
     var topics = this.topics = this.topics || [];
 
     topics[topic] && topics[topic].end();
