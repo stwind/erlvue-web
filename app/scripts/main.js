@@ -3,6 +3,7 @@ require.config({
     jquery: '../bower_components/jquery/jquery',
     backbone: '../bower_components/backbone/backbone',
     'backbone.layoutmanager': '../bower_components/layoutmanager/backbone.layoutmanager',
+    'backbone.stickit': '../bower_components/backbone.stickit/backbone.stickit',
     underscore: '../bower_components/underscore/underscore',
     'underscore.string': '../bower_components/underscore.string/lib/underscore.string',
     handlebars: '../bower_components/handlebars/handlebars.runtime',
@@ -19,8 +20,10 @@ require.config({
       exports: 'Backbone'
     },
     //d3: { exports: 'd3' },
-    handlebars: { exports: 'Handlebars' }
-  }
+    handlebars: { exports: 'Handlebars' },
+    'backbone.stickit': ['backbone']
+  },
+  deps: ['backbone.stickit', 'lib/backbone.layout']
 });
 
 require(['app','jquery'], function (App, $) {

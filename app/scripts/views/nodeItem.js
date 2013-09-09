@@ -6,12 +6,15 @@ define([
 
     template: 'nodeItem',
 
-    initialize: function (options) {
-      this.model.on('change', this.update, this);
+    bindings: {
+      '.node-item-pid': 'pid',
+      '.node-item-name': 'name',
+      '.node-item-mem': 'mem',
+      '.node-item-reds': 'reds'
     },
 
-    update: function() {
-      this.render();
+    afterRender: function() {
+      this.stickit();
     }
 
   });
