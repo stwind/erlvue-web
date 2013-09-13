@@ -29,7 +29,7 @@ define([
     },
 
     addItem: function (model) {
-      var view = new ItemView({ model: model });
+      var view = new ItemView({ model: model, factor: 50 });
 
       this.insertView('.procs', view).render().toState('enter');
       return this;

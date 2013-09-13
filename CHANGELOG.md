@@ -1,6 +1,6 @@
 ## 0.0.3
 
-* Setup data binding
+* Setup model binding
 
 ## 0.0.2
 

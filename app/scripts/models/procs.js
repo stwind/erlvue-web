@@ -11,8 +11,7 @@ define([
     },
 
     updateIndex: function() {
-      var collection = this.collection,
-          idx = collection.sortedIndex(this, 'mem');
+      var idx = this.collection.sortedIndex(this, 'mem');
 
       this.set('index', idx);
 
@@ -39,9 +38,10 @@ define([
       this.node = options.node;
       this.num = options.num || 20;
 
-      root.remoteOn('reset', function(ms) { root.set(ms); });
-      root.remoteOn('add', function(m) { root.add(m); });
-      root.remoteOn('remove', function(m) { root.remove(m); });
+      root
+        .remoteOn('reset', function(ms) { root.set(ms); });
+        .remoteOn('add', function(m) { root.add(m); });
+        .remoteOn('remove', function(m) { root.remove(m); });
     }
 
   });

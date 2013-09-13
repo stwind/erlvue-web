@@ -15,7 +15,7 @@ define([
       '.proc-reds': 'reds',
       ':el': {
         observe: 'index',
-        onGet: function(idx) { return idx * 50; },
+        onGet: function(idx) { return idx * this.options.factor; },
         update: function($el, val) {
           $el.css({ top: val + 'px' });
         }
