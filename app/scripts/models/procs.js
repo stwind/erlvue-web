@@ -4,14 +4,27 @@ define([
 ], function (Backbone, URI) {
 
   var Proc = Backbone.Model.extend({
-    idAttribute: 'pid'
+    idAttribute: 'pid',
+
+    initialize: function(attrs, options) {
+      this.listenTo(this.collection, 'sort', this.updateIndex);
+    },
+
+    updateIndex: function() {
+      var collection = this.collection,
+          idx = collection.sortedIndex(this, 'mem');
+
+      this.set('index', idx);
+
+      return this;
+    }
   });
 
   var Procs = Backbone.Collection.extend({
     model: Proc,
 
     comparator: function(p1, p2) {
-      return p1.get('mem') > p2.get('mem') ? -1 : 1;
+      return (p2 && p2.get('mem') < p1.get('mem')) ? 1 : -1
     },
 
     url: function() {
@@ -26,9 +39,9 @@ define([
       this.node = options.node;
       this.num = options.num || 20;
 
-      root.remoteOn('reset', function(models) {
-        root.set(models);
-      });
+      root.remoteOn('reset', function(ms) { root.set(ms); });
+      root.remoteOn('add', function(m) { root.add(m); });
+      root.remoteOn('remove', function(m) { root.remove(m); });
     }
 
   });

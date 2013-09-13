@@ -3,7 +3,7 @@ define([
   'underscore',
   'jquery',
 
-  './nodeItem'
+  './procItem'
 ], function (Backbone, _, $, ItemView) {
 
   return Backbone.View.extend({
@@ -11,7 +11,7 @@ define([
     template: 'content',
 
     partial: function($root, $el) {
-      $root.find('.container').append($el);
+      $root.find('.procs').append($el);
     },
 
     initialize: function (options) {
@@ -24,28 +24,27 @@ define([
     show: function (procs) {
       var collection = this.collection = procs;
 
-      // XXX: use listenTo ?
-      collection.on('sort', this.render);
-    },
-
-    beforeRender: function () {
-      var collection = this.collection;
-      if (collection) {
-        collection.each(this.addItem);
-      }
+      this.listenTo(collection, 'add', this.addItem);
+      this.listenTo(collection, 'remove', this.removeItem);
     },
 
     addItem: function (model) {
       var view = new ItemView({ model: model });
 
-      this.insertView('.container', view);
+      this.insertView('.procs', view).render().toState('enter');
       return this;
     },
 
     removeItem: function (model) {
-      this.removeView(function(view) {
-        return view.model.id == model.id;
+      var view = this.getView(function(v) {
+        return v.model.id == model.id;
       });
+
+      view.toState('exit');
+
+      setTimeout(function() {
+        view.remove();
+      }, 5000);
 
       return this;
     }

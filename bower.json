@@ -6,7 +6,7 @@
     "modernizr": "~2.6.2",
     "jquery": "~2.0.3",
     "backbone": "~1.0.0",
-    "layoutmanager": "https://github.com/tbranyen/backbone.layoutmanager.git#master",
+    "layoutmanager": "~0.9.2",
     "underscore": "~1.5.1",
     "handlebars": "~1.0.0",
     "bacon": "~0.6.8",
@@ -14,7 +14,8 @@
     "underscore.string": "~2.3.3",
     "normalize-css": "~2.1.2",
     "uri.js": "~1.11.2",
-    "backbone.stickit": "~0.6.3"
+    "backbone.stickit": "~0.6.3",
+    "d3": "~3.3.3"
   },
   "devDependencies": {
     "mocha": "~1.12.0",
