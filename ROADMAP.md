@@ -6,3 +6,7 @@ ROADMAP
 * etop support
 * wamp uri router
 * run on single node
+* UI
+    * model binding
+    * animation integration
+    * css structure convension
