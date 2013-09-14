@@ -17,7 +17,7 @@ define([
         observe: 'index',
         onGet: function(idx) { return idx * this.options.factor; },
         update: function($el, val) {
-          $el.css({ top: val + 'px' });
+          $el.animate({ top: val }, 1000);
         }
       }
     },

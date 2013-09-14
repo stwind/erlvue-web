@@ -39,8 +39,8 @@ define([
       this.num = options.num || 20;
 
       root
-        .remoteOn('reset', function(ms) { root.set(ms); });
-        .remoteOn('add', function(m) { root.add(m); });
+        .remoteOn('reset', function(ms) { root.set(ms); })
+        .remoteOn('add', function(m) { root.add(m); })
         .remoteOn('remove', function(m) { root.remove(m); });
     }
 
