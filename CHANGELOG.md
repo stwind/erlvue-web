@@ -1,6 +1,7 @@
 ## 0.0.3
 
 * Setup model binding
+* Experiment with animation
 
 ## 0.0.2
 
