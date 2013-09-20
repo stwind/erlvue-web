@@ -31,7 +31,7 @@ define([
       callresult: function (callId) {
         return bus.filter(function (msg) {
           return msg.type == 'callresult' && msg.callId == callId;
-        }).map('.result').log();
+        }).map('.result');
       },
       callerror: function (callId) {
         return bus.filter(function (msg) {
@@ -42,7 +42,6 @@ define([
       },
       event: function (topic) {
         return bus.filter(function (msg) {
-          console.log(msg);
           return msg.type == 'event' && msg.topic == topic;
         });
       },

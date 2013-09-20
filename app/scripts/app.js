@@ -4,10 +4,8 @@ define([
   'models/main',
   'views/main',
   'lib/wamp',
-  'lib/backbone.sync',
-
-  'lib/backbone.layout'
-], function (Router, AppModel, AppView, Wamp, Sync) {
+  'lib/backbone.remote'
+], function (Router, AppModel, AppView, Wamp, Remote) {
   'use strict';
 
   return {
@@ -17,7 +15,7 @@ define([
       Wamp.connect(opt.wsUrl).then(function(session) {
         var app = {};
 
-        Sync.init(session);
+        Remote.init(session);
 
         app.appModel = new AppModel();
         app.appView = new AppView({ 

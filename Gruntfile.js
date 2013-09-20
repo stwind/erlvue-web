@@ -156,7 +156,7 @@ module.exports = function (grunt) {
             return filename.replace(tmplPath, '').replace('.hbs', '');
           },
           processContent: function (content) {
-            return content.replace(/^[\r\n]+/, '').replace(/[\r\n]*$/, '');
+            return content.replace(/^[\s\r\n]+/, '').replace(/[\s\r\n]*$/, '');
           }
         },
         files: {

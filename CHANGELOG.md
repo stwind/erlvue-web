@@ -1,3 +1,7 @@
+## 0.0.3
+
+* Use Backgrid for layout
+
 ## 0.0.2
 
 * Update backbone model sycning method

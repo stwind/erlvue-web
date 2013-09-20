@@ -2,54 +2,73 @@ define([
   'backbone',
   'underscore',
   'jquery',
+  'backgrid'
+], function (Backbone, _, $, Backgrid) {
 
-  './nodeItem'
-], function (Backbone, _, $, ItemView) {
+  var columns = [{
+    name: 'pid',
+    label: 'pid',
+    sortable: false,
+    editable: false,
+    cell: 'string'
+  }, {
+    name: 'name',
+    label: 'name',
+    sortable: false,
+    editable: false,
+    cell: 'string'
+  }, {
+    name: 'mem',
+    label: 'mem',
+    sortable: false,
+    editable: false,
+    cell: 'integer'
+  }, {
+    name: 'reds',
+    label: 'reds',
+    sortable: false,
+    editable: false,
+    cell: 'integer'
+  }, {
+    name: 'mq',
+    label: 'msgq',
+    sortable: false,
+    editable: false,
+    cell: 'integer'
+  }, {
+    name: 'cf',
+    label: 'current function',
+    sortable: false,
+    editable: false,
+    cell: 'string'
+  }];
 
   return Backbone.View.extend({
 
-    template: 'content',
+    manage: true,
 
-    partial: function($root, $el) {
-      $root.find('.container').append($el);
-    },
+    template: 'content',
 
     initialize: function (options) {
       this.listenTo(this.model, 'change:current', function(model, procs) {
         this.show(procs);
       });
-      _.bindAll(this, 'addItem', 'removeItem', 'render');
+      _.bindAll(this, 'render');
     },
 
     show: function (procs) {
-      var collection = this.collection = procs;
-
-      // XXX: use listenTo ?
-      collection.on('sort', this.render);
+      this.collection = procs;
+      this.render();
     },
 
-    beforeRender: function () {
-      var collection = this.collection;
-      if (collection) {
-        collection.each(this.addItem);
-      }
-    },
-
-    addItem: function (model) {
-      var view = new ItemView({ model: model });
-
-      this.insertView('.container', view);
-      return this;
-    },
-
-    removeItem: function (model) {
-      this.removeView(function(view) {
-        return view.model.id == model.id;
+    afterRender: function() {
+      if (!this.collection) return this;
+      var grid = new Backgrid.Grid({
+        columns: columns,
+        collection: this.collection
       });
-
-      return this;
-    }
-
+      this.$('.procs').append(grid.render().$el);
+    },
   });
 
 });

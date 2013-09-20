@@ -48,7 +48,7 @@ define([
       Backbone.sync = function (method, model, options) {
         var url = _.result(model, 'url') || urlError(),
             data = options.attrs || model.toJSON(options),
-            args = method == 'create' || method == 'update' ? 
+            args = method == 'create' || method == 'update' || method == 'patch' ? 
               [url, method, data] : [url, method];
 
         return session.call.apply(session, args).then(options.success);
