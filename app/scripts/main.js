@@ -4,10 +4,11 @@ require.config({
     backbone: '../bower_components/backbone/backbone',
     'backbone.layoutmanager': '../bower_components/layoutmanager/backbone.layoutmanager',
     'backbone.stickit': '../bower_components/backbone.stickit/backbone.stickit',
+    backgrid: '../bower_components/backgrid/lib/backgrid',
     underscore: '../bower_components/underscore/underscore',
     'underscore.string': '../bower_components/underscore.string/lib/underscore.string',
     handlebars: '../bower_components/handlebars/handlebars.runtime',
-    d3: '../bower_components/d3/d3',
+    //d3: '../bower_components/d3/d3',
     //async: '../bower_components/async/lib/async',
     bacon: '../bower_components/bacon/dist/Bacon',
     sockjs: '../bower_components/sockjs-0.3.4/index',
@@ -19,7 +20,11 @@ require.config({
       deps: ['underscore', 'jquery'],
       exports: 'Backbone'
     },
-    d3: { exports: 'd3' },
+    backgrid: {
+      deps: ['backbone'],
+      exports: 'Backgrid'
+    },
+    //d3: { exports: 'd3' },
     handlebars: { exports: 'Handlebars' },
     'backbone.stickit': ['backbone']
   },

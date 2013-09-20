@@ -5,6 +5,8 @@ define([
   
   var View = Backbone.View.extend({
 
+    manage: true,
+
     template: 'main',
 
     sections: {

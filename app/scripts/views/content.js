@@ -2,53 +2,73 @@ define([
   'backbone',
   'underscore',
   'jquery',
+  'backgrid'
+], function (Backbone, _, $, Backgrid) {
 
-  './procItem'
-], function (Backbone, _, $, ItemView) {
+  var columns = [{
+    name: 'pid',
+    label: 'pid',
+    sortable: false,
+    editable: false,
+    cell: 'string'
+  }, {
+    name: 'name',
+    label: 'name',
+    sortable: false,
+    editable: false,
+    cell: 'string'
+  }, {
+    name: 'mem',
+    label: 'mem',
+    sortable: false,
+    editable: false,
+    cell: 'integer'
+  }, {
+    name: 'reds',
+    label: 'reds',
+    sortable: false,
+    editable: false,
+    cell: 'integer'
+  }, {
+    name: 'mq',
+    label: 'msgq',
+    sortable: false,
+    editable: false,
+    cell: 'integer'
+  }, {
+    name: 'cf',
+    label: 'current function',
+    sortable: false,
+    editable: false,
+    cell: 'string'
+  }];
 
   return Backbone.View.extend({
 
-    template: 'content',
+    manage: true,
 
-    partial: function($root, $el) {
-      $root.find('.procs').append($el);
-    },
+    template: 'content',
 
     initialize: function (options) {
       this.listenTo(this.model, 'change:current', function(model, procs) {
         this.show(procs);
       });
-      _.bindAll(this, 'addItem', 'removeItem', 'render');
+      _.bindAll(this, 'render');
     },
 
     show: function (procs) {
-      var collection = this.collection = procs;
-
-      this.listenTo(collection, 'add', this.addItem);
-      this.listenTo(collection, 'remove', this.removeItem);
+      this.collection = procs;
+      this.render();
     },
 
-    addItem: function (model) {
-      var view = new ItemView({ model: model, factor: 50 });
-
-      this.insertView('.procs', view).render().toState('enter');
-      return this;
-    },
-
-    removeItem: function (model) {
-      var view = this.getView(function(v) {
-        return v.model.id == model.id;
+    afterRender: function() {
+      if (!this.collection) return this;
+      var grid = new Backgrid.Grid({
+        columns: columns,
+        collection: this.collection
       });
-
-      view.toState('exit');
-
-      setTimeout(function() {
-        view.remove();
-      }, 5000);
-
-      return this;
-    }
-
+      this.$('.procs').append(grid.render().$el);
+    },
   });
 
 });

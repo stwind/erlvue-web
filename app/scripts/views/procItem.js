@@ -4,6 +4,8 @@ define([
 
   return Backbone.View.extend({
 
+    manage: true,
+
     template: 'procItem',
 
     className: 'proc',
@@ -15,9 +17,10 @@ define([
       '.proc-reds': 'reds',
       ':el': {
         observe: 'index',
-        onGet: function(idx) { return idx * this.options.factor; },
+        //onGet: function(idx) { return idx * this.options.factor; },
         update: function($el, val) {
-          $el.animate({ top: val }, 1000);
+          var height = $el.height();
+          $el.css({ top: val * height }, 800);
         }
       }
     },
