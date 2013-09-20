@@ -1,7 +1,6 @@
 ## 0.0.3
 
-* Setup model binding
-* Experiment with animation
+* Use Backgrid for layout
 
 ## 0.0.2
 
