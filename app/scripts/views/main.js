@@ -1,7 +1,8 @@
 define([
   'backbone',
-  './content'
-], function (Backbone, ContentView) {
+  './etop',
+  './stats'
+], function (Backbone, Etop, Stats) {
   
   var View = Backbone.View.extend({
 
@@ -9,20 +10,23 @@ define([
 
     template: 'main',
 
-    sections: {
-      content: '.content'
+    initialize: function () {
+      var model = this.model,
+          self = this;
+
+      this.listenTo(model, 'change:node', this.showProcs);
+
+      this.$el.addClass("grid");
     },
 
-    initialize: function () {
-      var model = this.model;
-
-      var content = new ContentView({ model: model });
+    showProcs: function(model) {
+      var etop = new Etop({ procs: model.get('procs')}),
+          stats = new Stats({ model: model.get('stats') });
 
       this.setViews({ 
-        content: content
-      });
-
-      this.render();
+        '.etop': etop,
+        '.stats': stats
+      }).render();
     }
 
   });

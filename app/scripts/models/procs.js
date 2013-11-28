@@ -4,19 +4,19 @@ define([
 ], function (Backbone, URI) {
 
   var Proc = Backbone.Model.extend({
-    idAttribute: 'pid',
+    idAttribute: 'pid'
 
-    initialize: function(attrs, options) {
-      this.listenTo(this.collection, 'sort', this.updateIndex);
-    },
+    //initialize: function(attrs, options) {
+      //this.listenTo(this.collection, 'sort', this.updateIndex);
+    //},
 
-    updateIndex: function() {
-      var idx = this.collection.sortedIndex(this, 'mem');
+    //updateIndex: function() {
+      //var idx = this.collection.sortedIndex(this, 'mem');
 
-      this.set('index', idx);
+      //this.set('index', idx);
 
-      return this;
-    }
+      //return this;
+    //}
   });
 
   var Procs = Backbone.Collection.extend({

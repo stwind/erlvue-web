@@ -1,8 +1,9 @@
 define([
   'backbone',
   './nodes',
-  './procs'
-], function (Backbone, Nodes, Procs) {
+  './procs',
+  './stats'
+], function (Backbone, Nodes, Procs, Stats) {
   
   var Model = Backbone.Model.extend({
 
@@ -18,11 +19,18 @@ define([
     },
 
     selectNode: function (name) {
-      var current = this.get('current');
-      if (!current || (current.node != name)) {
-        var collection = new Procs.Collection(null, { node: name });
-        this.set('current', collection);
+      var procs = this.get('procs'),
+          stats = this.get("stats");
+
+      if (!procs || (procs.node != name)) {
+        this.set('procs', new Procs.Collection(null, { node: name }));
       }
+
+      if (!stats || (stats.node != name)) {
+        this.set('stats', new Stats({ node: name }));
+      }
+
+      this.set('node', name);
     }
 
   });

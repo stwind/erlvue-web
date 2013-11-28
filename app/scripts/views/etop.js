@@ -47,13 +47,13 @@ define([
 
     manage: true,
 
-    template: 'content',
+    template: 'etop',
+
+    className: "procs backgrid-container",
 
     initialize: function (options) {
-      this.listenTo(this.model, 'change:current', function(model, procs) {
-        this.show(procs);
-      });
       _.bindAll(this, 'render');
+      this.show(options.procs);
     },
 
     show: function (procs) {
@@ -67,8 +67,8 @@ define([
         columns: columns,
         collection: this.collection
       });
-      this.$('.procs').append(grid.render().$el);
-    },
+      this.$el.append(grid.render().$el);
+    }
   });
 
 });
