@@ -1,1 +1,13 @@
 <div class='title'>Process</div>
+{{#if pid}}
+<div class='regname entry'><span class="name">registered name</span>: <span class="val">{{name}}</span></div>
+<div class='init-call entry'><span class="name">initial call</span>: <span class="val">{{initial_call}}</span></div>
+<div class='current-call entry'><span class="name">current function</span>: <span class="val">{{cf}}</span></div>
+<div class='mem entry'><span class="name">memory</span>: <span class="val">{{mem}}</span></div>
+<div class='msgq entry'><span class="name">messages</span>: <span class="val">{{mq}}</span></div>
+<div class='reds entry'><span class="name">reductions</span>: <span class="val">{{reds}}</span></div>
+<div class='status entry'><span class="name">status</span>: <span class="val">{{status}}</span></div>
+<div class='group-leader entry'><span class="name">group leader</span>: <span class="val">{{group_leader}}</span></div>
+{{else}}
+<div class='entry'>Select A Process</div>
+{{/if}}

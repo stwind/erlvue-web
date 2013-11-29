@@ -5,7 +5,7 @@ define([
   './stats'
 ], function (Backbone, Nodes, Procs, Stats) {
   
-  var Model = Backbone.Model.extend({
+  return Backbone.Model.extend({
 
     initialize: function () {
       var nodes = new Nodes.Collection(),
@@ -20,10 +20,16 @@ define([
 
     selectNode: function (name) {
       var procs = this.get('procs'),
-          stats = this.get("stats");
+          stats = this.get("stats"),
+          self = this;
 
       if (!procs || (procs.node != name)) {
-        this.set('procs', new Procs.Collection(null, { node: name }));
+        var collection = new Procs.Collection(null, { node: name });
+        this.set('procs', collection);
+
+        this.listenTo(collection, 'change:selected', function(model, val) {
+          val && self.set('proc', model);
+        });
       }
 
       if (!stats || (stats.node != name)) {
@@ -31,10 +37,16 @@ define([
       }
 
       this.set('node', name);
+
+      return this;
+    },
+
+    selectProc: function(id) {
+      var proc = this.get('procs').selectProc(id);
+      proc && this.set('proc', proc);
+      return this;
     }
 
   });
-
-  return Model;
 
 });

@@ -17,8 +17,8 @@ define([
 
         Remote.init(session);
 
-        var appModel = app.appModel = new AppModel();
-        app.appView = new AppView({ 
+        var appModel = app.model = new AppModel();
+        app.view = new AppView({ 
           model: appModel, 
           el: opt.mainEl 
         });

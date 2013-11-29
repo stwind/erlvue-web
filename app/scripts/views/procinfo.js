@@ -9,14 +9,26 @@ define([
     template: 'procinfo',
 
     bindings: {
-      '.proc-pid': 'pid',
-      '.proc-name': 'name',
-      '.proc-mem': 'mem',
-      '.proc-reds': 'reds'
+      '.mem .val': 'mem',
+      '.regname .val': 'name',
+      '.init-call .val': 'initial_call',
+      '.current-call .val': 'cf',
+      '.msgq .val': 'mq',
+      '.reds .val': 'reds',
+      '.status .val': 'status',
+      '.group-leader .val': 'group_leader',
+    },
+
+    show: function(model) {
+      this.model = model;
+
+      this.render();
     },
 
     afterRender: function() {
-      this.stickit();
+      if (this.model) {
+        this.stickit();
+      }
     }
 
   });

@@ -10,7 +10,20 @@ define([
       var path = '/proc/' + URI.encode(this.get('node')) + 
                  '/' + URI.encode(this.id);
       return new URI(path).href();
+    },
+
+    initialize: function(attrs, options) {
+      var options = _.defaults(options || {}, { sync: false });
+      if (options.sync) this.remoteSync();
+    },
+
+    remoteSync: function() {
+      var self = this;
+      this.remoteOn('update', function(data) {
+        self.set(data);
+      });
     }
+
   });
 
   var Procs = Backbone.Collection.extend({
@@ -32,13 +45,17 @@ define([
       this.node = options.node;
       this.num = options.num || 20;
 
-      self
+      this
         .remoteOn('reset', function(ms) { self.set(ms); })
         .remoteOn('add', function(m) { self.add(m); })
         .remoteOn('remove', function(m) { self.remove(m); });
 
-
       this.on('change:selected', this._modelSelected);
+    },
+
+    selectProc: function(id) {
+      var proc = this.get(id);
+      return proc ? proc.set('selected', true) : proc;
     },
 
     _modelSelected: function(model, val) {
