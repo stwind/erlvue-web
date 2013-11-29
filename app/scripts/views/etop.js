@@ -2,8 +2,9 @@ define([
   'backbone',
   'underscore',
   'jquery',
-  'backgrid'
-], function (Backbone, _, $, Backgrid) {
+  'backgrid',
+  './backgrid/row'
+], function (Backbone, _, $, Backgrid, Row) {
 
   var columns = [{
     name: 'pid',
@@ -49,23 +50,14 @@ define([
 
     template: 'etop',
 
-    className: "procs backgrid-container",
-
-    initialize: function (options) {
-      _.bindAll(this, 'render');
-      this.show(options.procs);
-    },
-
-    show: function (procs) {
-      this.collection = procs;
-      this.render();
-    },
+    className: "backgrid-container",
 
     afterRender: function() {
       if (!this.collection) return this;
       var grid = new Backgrid.Grid({
         columns: columns,
-        collection: this.collection
+        collection: this.collection,
+        row: Row
       });
       this.$el.append(grid.render().$el);
     }

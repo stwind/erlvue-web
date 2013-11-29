@@ -1,8 +1,9 @@
 define([
   'backbone',
   './etop',
-  './stats'
-], function (Backbone, Etop, Stats) {
+  './stats',
+  './procinfo'
+], function (Backbone, Etop, Stats, ProcInfo) {
   
   var View = Backbone.View.extend({
 
@@ -11,8 +12,7 @@ define([
     template: 'main',
 
     initialize: function () {
-      var model = this.model,
-          self = this;
+      var model = this.model;
 
       this.listenTo(model, 'change:node', this.showProcs);
 
@@ -20,12 +20,16 @@ define([
     },
 
     showProcs: function(model) {
-      var etop = new Etop({ procs: model.get('procs')}),
-          stats = new Stats({ model: model.get('stats') });
+      var procs = model.get('procs');
+
+      var etop = new Etop({ collection: procs }),
+          stats = new Stats({ model: model.get('stats') }),
+          profInfo = new ProcInfo({ model: model.get('stats') });
 
       this.setViews({ 
         '.etop': etop,
-        '.stats': stats
+        '.stats': stats,
+        '.proc-info': profInfo
       }).render();
     }
 

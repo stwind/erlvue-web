@@ -17,66 +17,84 @@ ul {
     color: red;
 }
 
+.grid-item {
+    margin-bottom: 10px;
+}
+
 .backgrid {
-  width: 100%;
+    width: 100%;
 
-  th.renderable,
-  td.renderable {
-      display: table-cell;
-  }
+    th.renderable,
+    td.renderable {
+        display: table-cell;
+    }
 
 
-  th.renderable {
-      color: #ffffff;
-      background-color: #333333;
-  }
+    th.renderable {
+        color: #ffffff;
+        background-color: #333333;
+    }
 
-  th,
-  td {
-      display: none;
-      height: 20px;
-      max-width: 250px;
-      padding: 2px 5px;
-      overflow: hidden;
-      line-height: 20px;
-      text-align: left;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-      vertical-align: middle;
-      /*border-bottom: 1px solid #DDD;*/
-  }
+    th,
+    td {
+        height: 20px;
+        max-width: 250px;
+        padding: 2px 5px;
+        overflow: hidden;
+        line-height: 20px;
+        text-align: left;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        vertical-align: middle;
+        /*border-bottom: 1px solid #DDD;*/
+    }
 
-  th.mem,
-  th.reds,
-  th.mq {
-      text-align: right;
-  }
+    th.mem,
+    th.reds,
+    th.mq {
+        text-align: right;
+    }
 
-  .date-cell,
-  .time-cell,
-  .datetime-cell,
-  .number-cell,
-  .integer-cell,
-  .date-cell.editor input[type=text],
-  .time-cell.editor input[type=text],
-  .datetime-cell.editor input[type=text],
-  .number-cell.editor input[type=text],
-  .integer-cell.editor input[type=text] {
-      text-align: right;
-  }
+    .date-cell,
+    .time-cell,
+    .datetime-cell,
+    .number-cell,
+    .integer-cell,
+    .date-cell.editor input[type=text],
+    .time-cell.editor input[type=text],
+    .datetime-cell.editor input[type=text],
+    .number-cell.editor input[type=text],
+    .integer-cell.editor input[type=text] {
+        text-align: right;
+    }
 
 }
 
-.stats{
-    .title {
-        color: #ffffff;
-        background-color: #333333;
-        font-weight: bold;
-        padding: 2px 5px 3px;
+.etop {
+    tbody {
+        .code-font;
+
+        tr:hover {
+            color: #ffffff;
+            background-color: #999999;
+            cursor: pointer;
+        }
     }
 
+    .selected {
+        background-color: #dddddd;
+    }
+}
+
+.stats{
     .entry {
         height: 20px;
         padding: 2px 0px;
+
+        .code-font;
+    }
+
+    .name {
+        font-weight: bold;
     }
 }
