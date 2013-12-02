@@ -45,7 +45,6 @@ define([
       var self = this;
 
       this.node = options.node;
-      this.num = options.num || 20;
 
       this
         .remoteOn('reset', function(ms) { self.set(ms); })
@@ -57,7 +56,7 @@ define([
 
     selectProc: function(id) {
       var proc = this.get(id);
-      return proc ? proc.set('selected', true) : proc;
+      return proc ? proc.set('selected', true) : void 0;
     },
 
     _modelSelected: function(model, val) {
