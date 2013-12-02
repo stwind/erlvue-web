@@ -15,8 +15,6 @@ define([
     initialize: function () {
       var model = this.model;
 
-      this.$el.addClass("grid");
-
       this.listenTo(model, 'change:node', this.showProcs);
       this.listenTo(model, 'change:proc', this.showProc);
     },
