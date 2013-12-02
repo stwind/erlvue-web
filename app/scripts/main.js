@@ -39,5 +39,7 @@ require(['app','jquery'], function (App, $) {
       mainEl: '#main'
     }).then(function(app) {
       console.log('app started: ', app);
+
+      window.App = app;
     });
 });

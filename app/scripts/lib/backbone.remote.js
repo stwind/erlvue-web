@@ -12,9 +12,10 @@ define([
     init: function (session, opts) {
       var opts = _.defaults(opts || {}, {
         topic: function(model, name) {
-          var url = _.result(model, 'url') || urlError();
+          var url = _.result(model, 'url') || urlError(),
+              str = new URI(url).path() + '?type=' + name;
 
-          return new URI(url).path() + '?type=' + name;
+          return str.toLowerCase();
         }
       });
 

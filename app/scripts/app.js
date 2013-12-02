@@ -17,14 +17,14 @@ define([
 
         Remote.init(session);
 
-        app.appModel = new AppModel();
-        app.appView = new AppView({ 
-          model: app.appModel, 
+        var appModel = app.model = new AppModel();
+        app.view = new AppView({ 
+          model: appModel, 
           el: opt.mainEl 
         });
         app.router = new Router({ 
           pushState: true, root: '/',
-          model: app.appModel
+          model: appModel
         });
 
         def.resolve(app);

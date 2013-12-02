@@ -1,8 +1,11 @@
 body {
     background: #fafafa;
-    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    /*font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;*/
+    font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
     color: #333;
     font-size: 16px;
+    line-height: 19px;
+    padding: 10px;
 }
 
 ul {
@@ -13,4 +16,90 @@ ul {
 
 .removed {
     color: red;
+}
+
+.grid-item {
+    margin-bottom: 10px;
+}
+
+.backgrid {
+    width: 100%;
+
+    th.renderable,
+    td.renderable {
+        display: table-cell;
+    }
+
+
+    th.renderable {
+        color: #ffffff;
+        background-color: #333333;
+    }
+
+    th,
+    td {
+        height: 20px;
+        max-width: 250px;
+        padding: 2px 5px;
+        overflow: hidden;
+        line-height: 20px;
+        text-align: left;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        vertical-align: middle;
+        /*border-bottom: 1px solid #DDD;*/
+    }
+
+    th.mem,
+    th.reds,
+    th.mq {
+        text-align: right;
+    }
+
+    .date-cell,
+    .time-cell,
+    .datetime-cell,
+    .number-cell,
+    .integer-cell,
+    .date-cell.editor input[type=text],
+    .time-cell.editor input[type=text],
+    .datetime-cell.editor input[type=text],
+    .number-cell.editor input[type=text],
+    .integer-cell.editor input[type=text] {
+        text-align: right;
+    }
+
+}
+
+.etop {
+    tbody {
+        .code-font;
+
+        tr:hover {
+            color: #ffffff;
+            background-color: #999999;
+            cursor: pointer;
+        }
+    }
+
+    .selected {
+        background-color: #dddddd;
+    }
+
+    td:first-child {
+        padding-left: 0px;
+    }
+}
+
+.stats, .proc-info{
+    .entry {
+        height: 20px;
+        padding: 2px 0px;
+
+        .code-font;
+    }
+
+    .name {
+        font-weight: bold;
+    }
 }
