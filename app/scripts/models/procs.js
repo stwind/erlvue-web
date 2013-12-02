@@ -13,12 +13,16 @@ define([
     },
 
     initialize: function(attrs, options) {
+
       var options = _.defaults(options || {}, { sync: false });
       if (options.sync) this.remoteSync();
     },
 
     remoteSync: function() {
       var self = this;
+
+      this.fetch();
+
       this.remoteOn('update', function(data) {
         self.set(data);
       });
@@ -44,6 +48,8 @@ define([
 
       this.node = options.node;
       this.num = options.num || 20;
+
+      this.fetch();
 
       this
         .remoteOn('reset', function(ms) { self.set(ms); })
