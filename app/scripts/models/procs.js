@@ -21,11 +21,9 @@ define([
     remoteSync: function() {
       var self = this;
 
-      this.fetch();
-
-      this.remoteOn('update', function(data) {
-        self.set(data);
-      });
+      this
+        .remoteOn('update', function(data) { self.set(data); })
+        .fetch();
     }
 
   });
@@ -49,14 +47,12 @@ define([
       this.node = options.node;
       this.num = options.num || 20;
 
-      this.fetch();
-
       this
         .remoteOn('reset', function(ms) { self.set(ms); })
         .remoteOn('add', function(m) { self.add(m); })
-        .remoteOn('remove', function(m) { self.remove(m); });
-
-      this.on('change:selected', this._modelSelected);
+        .remoteOn('remove', function(m) { self.remove(m); })
+        .on('change:selected', this._modelSelected)
+        .fetch();
     },
 
     selectProc: function(id) {

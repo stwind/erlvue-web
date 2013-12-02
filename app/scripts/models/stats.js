@@ -14,11 +14,11 @@ define([
     initialize: function(attrs, options) {
       var self = this;
 
-      this.remoteOn("update", function(data) {
-        self.set(self.parse(data), options);
-      });
-
-      this.fetch();
+      this
+        .remoteOn("update", function(data) {
+          self.set(self.parse(data), options);
+        })
+        .fetch();
     },
 
     parse: function(resp, options) {
